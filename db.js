@@ -1,35 +1,52 @@
-// get all teams
 
 app.get('/teams', (req, res) => {
     const query = `SELECT * FROM TEAMS`;
     res.json(teams);
-  });
-
-///gets a team by id
+});
 
 
-app.get('/teams/:id', (req, res) => {
 
-    //looked this functionality up
-    const teamId = parseInt(req.body.id);
-    const team = teams.find(t => t.id === teamId);
-  
-    if (team) {
-      res.json(team);
-    } else {
-      res.status(404).json({ message: 'Team not found' });
-    }
-  });
+const getPlayerById = (req, res) => {
 
-  app.get('/players/:id', (req, res) => {
-
-    //looked this functionality up
     const playerId = parseInt(req.body.id);
-    const player = players.find(t => t.id === playerId);
-  
-    if (team) {
-      res.json(player);
-    } else {
-      res.status(404).json({ message: 'Player not found' });
-    }
-  });
+    const query = `SELECT * FROM Player WHERE id = ?`;
+
+    db.get(query, [playerId], (error, result) => {
+        if (error) {
+            console.error(error.message);
+            res.status(400).json({ error: error.message });
+            return;
+        }
+        
+        if (result) {
+            res.json(result);
+        } else {
+            res.sendStatus(404);
+        }
+    }); 
+
+};
+
+const getTeamById = (req, res) => {
+
+    // 
+    const teamId = parseInt(req.body.id);
+        const query = `SELECT * FROM Team WHERE id = ?`;
+
+    db.get(query, [teamId], (error, result) => {
+        if (error) {
+            console.error(error.message);
+            res.status(400).json({ error: error.message });
+            return;
+        }
+        
+        if (result) {
+            res.json(result);
+        } else {
+            res.sendStatus(404);
+        }
+    }); 
+};
+
+
+/// need to understand the difference between .body and .params
