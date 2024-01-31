@@ -1,7 +1,8 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const db = require("./db")
-const port = 3000;
+const PORT = 3000;
+
 
 app.use(express.json());
 
@@ -18,9 +19,8 @@ app.get("/country/:id", db.getCountryById);
 app.get("/league/:id", db.getLeagueById);
 
 
-
-
-
-
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
 
 
