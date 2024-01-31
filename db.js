@@ -13,7 +13,7 @@ app.get('/teams', (req, res) => {
 });
 
 
-
+//Gets all players
 const getPlayerById = (req, res) => {
 
     const playerId = parseInt(req.body.id);
@@ -35,6 +35,7 @@ const getPlayerById = (req, res) => {
 
 };
 
+//Gets all teams  
 const getTeamById = (req, res) => {
 
     // 
@@ -56,6 +57,7 @@ const getTeamById = (req, res) => {
     }); 
 };
 
+
 /// need to understand the difference between .body and .params
 
 
@@ -64,3 +66,12 @@ module.exports = {
     getTeamById
 
 }
+
+//#endregion Routes
+
+module.exports = {
+    getLeagueById,
+    getCountryById,
+    getTeamById,
+    getPlayerById,
+  };

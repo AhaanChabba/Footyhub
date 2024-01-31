@@ -9,7 +9,14 @@ app.use(express.json());
 app.get("/players/:id", db.getPlayerById);
 
 //get individual teams
-app.get("/players/:id", db.getPlayerById);
+app.get("/team/:id", db.getTeamById);
+
+//get individual country
+app.get("/country/:id", db.getCountryById);
+
+//get individual league
+app.get("/league/:id", db.getLeagueById);
+
 
 
 
