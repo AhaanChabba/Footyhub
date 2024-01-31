@@ -1,3 +1,11 @@
+const path = require("path");
+const sqlite = require("sqlite3").verbose();
+const dbFile = path.join(__dirname, "database.sqlite"); /// not a clue what this does
+const db = new sqlite.Database(dbFile, (error) => {
+  if (error) return console.error(error.message);
+  console.log(`Connected to database ${dbFile}`);
+});
+
 
 app.get('/teams', (req, res) => {
     const query = `SELECT * FROM TEAMS`;
@@ -48,5 +56,11 @@ const getTeamById = (req, res) => {
     }); 
 };
 
-
 /// need to understand the difference between .body and .params
+
+
+module.exports = {
+    getPlayerById,
+    getTeamById
+
+}
