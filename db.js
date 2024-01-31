@@ -1,10 +1,3 @@
-
-app.get('/teams', (req, res) => {
-    const query = `SELECT * FROM TEAMS`;
-    res.json(teams);
-});
-
-
 //Gets all players
 const getPlayerById = (req, res) => {
 

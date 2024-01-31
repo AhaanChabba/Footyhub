@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
 const db = require("./db")
-const port = 3000;
+const PORT = 3000;
+app.get('/teams', (req, res) => {
+  const query = `SELECT * FROM TEAMS`;
+  res.json(teams);
+});
 
 app.use(express.json());
 
@@ -17,6 +21,12 @@ app.get("/country/:id", db.getCountryById);
 //get individual league
 app.get("/league/:id", db.getLeagueById);
 
+//#region Server
+//-----------------------------
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
+//#endregion Server
 
 
 
