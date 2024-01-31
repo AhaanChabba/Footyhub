@@ -1,3 +1,10 @@
+
+app.get('/teams', (req, res) => {
+    const query = `SELECT * FROM TEAMS`;
+    res.json(teams);
+});
+
+
 //Gets all players
 const getPlayerById = (req, res) => {
 
@@ -10,13 +17,13 @@ const getPlayerById = (req, res) => {
             res.status(400).json({ error: error.message });
             return;
         }
-        
+
         if (result) {
             res.json(result);
         } else {
             res.sendStatus(404);
         }
-    }); 
+    });
 
 };
 
@@ -25,7 +32,7 @@ const getTeamById = (req, res) => {
 
     // 
     const teamId = parseInt(req.body.id);
-        const query = `SELECT * FROM Team WHERE id = ?`;
+    const query = `SELECT * FROM Team WHERE id = ?`;
 
     db.get(query, [teamId], (error, result) => {
         if (error) {
@@ -33,16 +40,15 @@ const getTeamById = (req, res) => {
             res.status(400).json({ error: error.message });
             return;
         }
-        
+
         if (result) {
             res.json(result);
         } else {
             res.sendStatus(404);
         }
-    }); 
+    });
 };
 
-// Gets all countries
 const getCountryById = (req, res) => {
     const query = `SELECT * FROM Country`;
 
@@ -58,7 +64,7 @@ const getCountryById = (req, res) => {
         } else {
             res.sendStatus(404);
         }
-    }); 
+    });
 };
 
 // Gets all leagues
@@ -77,11 +83,14 @@ const getLeagueById = (req, res) => {
         } else {
             res.sendStatus(404);
         }
-    }); 
+    });
 };
 
 
 /// need to understand the difference between .body and .params
+
+
+
 
 //#endregion Routes
 
@@ -90,4 +99,4 @@ module.exports = {
     getCountryById,
     getTeamById,
     getPlayerById,
-  };
+};
