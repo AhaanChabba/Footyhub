@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const db = require("./db")
 const PORT = 3000;
+
 app.get('/teams', (req, res) => {
-  const query = `SELECT * FROM TEAMS`;
+  const query = `SELECT * FROM Teams`;
   res.json(teams);
 });
 

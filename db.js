@@ -1,14 +1,17 @@
-
-app.get('/teams', (req, res) => {
-    const query = `SELECT * FROM TEAMS`;
-    res.json(teams);
+const path = require("path");
+const sqlite = require("sqlite3").verbose();
+const dbFile = path.join("database.sqlite");
+const db = new sqlite.Database(dbFile, (error) => {
+  if (error) return console.error(error.message);
+  console.log(`Connected to database ${dbFile}`);
 });
+
 
 
 //Gets all players
 const getPlayerById = (req, res) => {
 
-    const playerId = parseInt(req.body.id);
+    const playerId = parseInt(req.params.id);
     const query = `SELECT * FROM Player WHERE id = ?`;
 
     db.get(query, [playerId], (error, result) => {
@@ -31,7 +34,7 @@ const getPlayerById = (req, res) => {
 const getTeamById = (req, res) => {
 
     // 
-    const teamId = parseInt(req.body.id);
+    const teamId = parseInt(req.params.id);
     const query = `SELECT * FROM Team WHERE id = ?`;
 
     db.get(query, [teamId], (error, result) => {
@@ -50,9 +53,11 @@ const getTeamById = (req, res) => {
 };
 
 const getCountryById = (req, res) => {
-    const query = `SELECT * FROM Country`;
+    const countryId = parseInt(req.params.id);
+    const query = `SELECT * FROM Country WHERE id = ?`;
 
-    db.all(query, [], (error, results) => {
+
+    db.get(query, [countryId], (error, result) => {
         if (error) {
             console.error(error.message);
             res.status(400).json({ error: error.message });
@@ -69,9 +74,10 @@ const getCountryById = (req, res) => {
 
 // Gets all leagues
 const getLeagueById = (req, res) => {
+    const leagueId = parseInt(req.params.id);
     const query = `SELECT * FROM League`;
 
-    db.all(query, [], (error, results) => {
+    db.get(query, [leagueId], (error, results) => {
         if (error) {
             console.error(error.message);
             res.status(400).json({ error: error.message });
@@ -85,9 +91,6 @@ const getLeagueById = (req, res) => {
         }
     });
 };
-
-
-/// need to understand the difference between .body and .params
 
 
 
