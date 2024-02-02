@@ -2,13 +2,12 @@ const path = require("path");
 const sqlite = require("sqlite3").verbose();
 const dbFile = path.join("database.sqlite");
 const db = new sqlite.Database(dbFile, (error) => {
-  if (error) return console.error(error.message);
-  console.log(`Connected to database ${dbFile}`);
+    if (error) return console.error(error.message);
+    console.log(`Connected to database ${dbFile}`);
 });
 
 
 
-//Gets all players
 const getPlayerById = (req, res) => {
 
     const playerId = parseInt(req.params.id);
@@ -30,10 +29,12 @@ const getPlayerById = (req, res) => {
 
 };
 
-//Gets all teams  
+
+
+
 const getTeamById = (req, res) => {
 
-    // 
+
     const teamId = parseInt(req.params.id);
     const query = `SELECT * FROM Team WHERE id = ?`;
 
@@ -51,6 +52,7 @@ const getTeamById = (req, res) => {
         }
     });
 };
+
 
 const getCountryById = (req, res) => {
     const countryId = parseInt(req.params.id);
@@ -72,7 +74,7 @@ const getCountryById = (req, res) => {
     });
 };
 
-// Gets all leagues
+
 const getLeagueById = (req, res) => {
     const leagueId = parseInt(req.params.id);
     const query = `SELECT * FROM League`;
